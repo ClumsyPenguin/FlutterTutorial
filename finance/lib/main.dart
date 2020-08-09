@@ -1,4 +1,4 @@
-import 'package:finance/widgets/transaction_list.dart';
+import './widgets/transaction_list.dart';
 import './widgets/new_transaction.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -59,13 +59,13 @@ class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _transactionList = [
     Transaction(
       id: '1',
-      title: 'Laptop',
+      title: 'laptop',
       amount: 2700,
       date: DateTime.now(),
     ),
     Transaction(
       id: '2',
-      title: 'Car',
+      title: 'car',
       amount: 39999.99,
       date: DateTime.now(),
     ),
