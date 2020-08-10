@@ -1,3 +1,5 @@
+import './widgets/chart.dart';
+
 import './widgets/transaction_list.dart';
 import './widgets/new_transaction.dart';
 import 'package:flutter/cupertino.dart';
@@ -56,20 +58,17 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  final List<Transaction> _transactionList = [
-    Transaction(
-      id: '1',
-      title: 'laptop',
-      amount: 2700,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: '2',
-      title: 'car',
-      amount: 39999.99,
-      date: DateTime.now(),
-    ),
-  ];
+  final List<Transaction> _transactionList = [];
+
+  List<Transaction> get _recentTransactions {
+    return _transactionList.where((tx) {
+      return tx.date.isAfter(
+        DateTime.now().subtract(
+          Duration(days: 7),
+        ),
+      );
+    }).toList();
+  }
 
   void _addNewTransaction(String txTitle, double txAmount) {
     final newTx = Transaction(
@@ -104,14 +103,8 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Container(
-              width: double.infinity,
-              child: Card(
-                child: Text('Chart'),
-                elevation: 5,
-              ),
-            ),
-            TransactionList(_transactionList)
+            Chart(_recentTransactions),
+            TransactionList(_transactionList),
           ],
         ),
       ),
